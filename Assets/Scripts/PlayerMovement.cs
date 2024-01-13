@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             canJump = true;
         }
-        else if (isGrounded)
+        else if (isGrounded && rigid.velocity.y == 0)
         {
             canJump = true;
             jumpCounter = jumpCount;
