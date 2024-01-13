@@ -6,70 +6,44 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce = 16;
+
+    private float movementInputDirection;
 
     private Rigidbody2D rigid;
-
-    private Movement movement;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        movement = new Movement(moveSpeed, rigid);
+    }
+
+    private void Update()
+    {
+        CheckInput();
     }
 
     private void FixedUpdate()
     {
-        movement.MoveUpdate();
-    }
-}
-
-class Movement
-{
-    private float moveSpeed;
-
-    private Vector2 moveVec;
-
-    private Rigidbody2D rigid;
-
-    public float MoveSpeed
-    {
-        get
-        {
-            return moveSpeed;
-        }
-        set
-        {
-            moveSpeed = value;
-        }
-    }
-    public Movement(float moveSpeed, Rigidbody2D rigid)
-    {
-        this.moveSpeed = moveSpeed;
-        this.rigid = rigid;
+        MoveUpdate();
     }
 
-    public void MoveUpdate()
+    private void CheckInput()
     {
-        moveVec.x = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        moveVec.y = rigid.velocity.y;
+        movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-        rigid.velocity = moveVec;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
     }
-}
 
-class JumpClass
-{
-    private float jumpForce;
-
-    public float JumpForce
+    private void MoveUpdate()
     {
-        get
-        {
-            return jumpForce;
-        }
-        set
-        {
-            jumpForce = value;
-        }
+        rigid.velocity = new Vector2(moveSpeed * movementInputDirection, rigid.velocity.y);
+    }
+
+    private void Jump()
+    {
+        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
     }
 }
