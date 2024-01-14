@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool canJump;
     private bool isAttacking;
+    private bool isLookRight;
 
     private Rigidbody2D rigid;
 
@@ -53,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         CheckIfCanJump();
         CheckFlip();
         AngleUpdate();
+        WeaponAming();
     }
 
     private void FixedUpdate()
@@ -72,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
         }
     }
 
@@ -99,18 +105,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckFlip()
     {
-        if (movementInputDirection > 0)
+
+        if (movementInputDirection > 0 || (isAttacking && Mathf.Abs(angle) < 90))
         {
             transform.localScale = new Vector3(1, 1, 1);
+            isLookRight = true;
         }
-        else
+        else if (movementInputDirection < 0 || isAttacking)
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            isLookRight = false;
         }
     }
 
     private void AngleUpdate()
     {
+        mousePos = GameManager.Instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+    }
+
+    private void WeaponAming()
+    {
+        if (isAttacking)
+        {
+            weaponPivot.rotation = Quaternion.AngleAxis(angle + (isLookRight ? 0 : -180), Vector3.forward);
+        }
+        else
+        {
+            weaponPivot.rotation = Quaternion.identity;
+        }
     }
 
     private void MoveUpdate()
