@@ -19,14 +19,26 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    #region Weapon Info
+
+    [Space(10)]
+    [Header("Weapon Info")]
+    [SerializeField] private Transform weaponPivot;
+
+    #endregion
+
     private int jumpCounter;
 
     private float movementInputDirection;
+    private float angle;
 
     private bool isGrounded;
     private bool canJump;
+    private bool isAttacking;
 
     private Rigidbody2D rigid;
+
+    private Vector2 mousePos;
 
     private void Start()
     {
@@ -39,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         CheckInput();
         CheckSurroundings();
         CheckIfCanJump();
+        CheckFlip();
+        AngleUpdate();
     }
 
     private void FixedUpdate()
@@ -53,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            isAttacking = true;
         }
     }
 
@@ -76,6 +95,22 @@ public class PlayerMovement : MonoBehaviour
         {
             canJump = false;
         }
+    }
+
+    private void CheckFlip()
+    {
+        if (movementInputDirection > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    private void AngleUpdate()
+    {
     }
 
     private void MoveUpdate()
