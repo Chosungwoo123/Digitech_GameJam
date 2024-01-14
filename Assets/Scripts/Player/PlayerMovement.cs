@@ -24,6 +24,18 @@ public class PlayerMovement : MonoBehaviour
     [Space(10)]
     [Header("Weapon Info")]
     [SerializeField] private Transform weaponPivot;
+    [SerializeField] private Transform shootPos;
+    [SerializeField] private PlayerBullet bulletPrefab;
+
+    #endregion
+
+    #region Attack Info
+
+    [Space(10)]
+    [Header("Attack Info")]
+    [SerializeField] private float attackRate;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletDamage;
 
     #endregion
 
@@ -31,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementInputDirection;
     private float angle;
+    private float attackTimer;
 
     private bool isGrounded;
     private bool canJump;
@@ -55,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         CheckFlip();
         AngleUpdate();
         WeaponAming();
+        AttackUpdate();
     }
 
     private void FixedUpdate()
@@ -105,13 +119,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckFlip()
     {
+        if (isAttacking)
+        {
+            if (Mathf.Abs(angle) < 90)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                isLookRight = true;
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                isLookRight = false;
+            }
 
-        if (movementInputDirection > 0 || (isAttacking && Mathf.Abs(angle) < 90))
+            return;
+        }
+
+        if (movementInputDirection > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
             isLookRight = true;
         }
-        else if (movementInputDirection < 0 || isAttacking)
+        else if (movementInputDirection < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             isLookRight = false;
@@ -128,12 +157,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAttacking)
         {
-            weaponPivot.rotation = Quaternion.AngleAxis(angle + (isLookRight ? 0 : -180), Vector3.forward);
+            weaponPivot.rotation = Quaternion.AngleAxis(angle + (isLookRight ? 0 : 180), Vector3.forward);
+            shootPos.localRotation = Quaternion.AngleAxis((isLookRight ? 0 : 180), Vector3.up);
         }
         else
         {
             weaponPivot.rotation = Quaternion.identity;
         }
+    }
+
+    private void AttackUpdate()
+    {
+        if (isAttacking && attackTimer > attackRate)
+        {
+            Shooting();
+
+            attackTimer = 0;
+        }
+
+        attackTimer += Time.deltaTime;
     }
 
     private void MoveUpdate()
@@ -148,6 +190,12 @@ public class PlayerMovement : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
             jumpCounter--;
         }
+    }
+
+    private void Shooting()
+    {
+        var bullet = Instantiate(bulletPrefab, shootPos.position, shootPos.rotation);
+        bullet.Init(bulletSpeed, bulletDamage);
     }
 
     private void OnDrawGizmos()
