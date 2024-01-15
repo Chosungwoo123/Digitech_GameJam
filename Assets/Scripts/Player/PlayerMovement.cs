@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce = 16;
+    [SerializeField] private float maxHealth;
 
     #region Ground Check
 
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementInputDirection;
     private float angle;
     private float attackTimer;
+    private float curHealth;
 
     private bool isGrounded;
     private bool canJump;
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         jumpCounter = jumpCount;
+        curHealth = maxHealth;
     }
 
     private void Update()

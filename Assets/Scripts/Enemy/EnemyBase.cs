@@ -6,6 +6,7 @@ public class EnemyBase : MonoBehaviour
 {
     public float scanRadius;
     public float moveSpeed;
+    public float maxHealth;
 
     public LayerMask playerLayer;
     public LayerMask groundLayer;
@@ -39,7 +40,8 @@ public class EnemyBase : MonoBehaviour
     private float movementDirection;
     private float xScale;
     private float fireTimer;
-    float bulletAngle;
+    private float curHealth;
+    private float bulletAngle;
 
     private bool isGrounded;
     private bool isTargeting;
@@ -60,6 +62,7 @@ public class EnemyBase : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         xScale = transform.localScale.x;
         fireIntervalSeconds = new WaitForSeconds(fireInterval);
+        curHealth = maxHealth;
     }
 
     private void Update()
@@ -241,5 +244,15 @@ public class EnemyBase : MonoBehaviour
         }
 
         Gizmos.DrawRay(groundCheckPos.position, Vector3.down * groundCheckRange);
+    }
+
+    public void OnDamage(float damage)
+    {
+        curHealth -= damage;
+
+        if (curHealth <= 0)
+        {
+            // Á×´Â ·ÎÁ÷
+        }
     }
 }
