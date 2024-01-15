@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class EnemyBase : MonoBehaviour
 
     public LayerMask playerLayer;
     public LayerMask groundLayer;
+
+    public Action dieEvent;
 
     #region Ground Check
 
@@ -66,6 +69,12 @@ public class EnemyBase : MonoBehaviour
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        transform.rotation = Quaternion.identity;
         startPos = transform.position;
         rigid = GetComponent<Rigidbody2D>();
         xScale = transform.localScale.x;
@@ -274,8 +283,9 @@ public class EnemyBase : MonoBehaviour
         if (curHealth <= 0)
         {
             // Á×´Â ·ÎÁ÷
-            Destroy(gameObject);
             Instantiate(dieEffect, transform.position, Quaternion.identity);
+            dieEvent?.Invoke();
+            gameObject.SetActive(false);
             return;
         }
 
