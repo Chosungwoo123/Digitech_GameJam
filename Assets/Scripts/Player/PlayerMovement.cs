@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce = 16;
-    [SerializeField] private float maxHealth;
+    public float maxHealth;
+    public float curHealth;
 
     #region Ground Check
 
@@ -60,8 +61,9 @@ public class PlayerMovement : MonoBehaviour
     private float movementInputDirection;
     private float angle;
     private float attackTimer;
-    private float curHealth;
+    
     private float dashTimer;
+    private float baseMaxHealth;
 
     private bool isGrounded;
     private bool canJump;
@@ -80,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         jumpCounter = jumpCount;
+        baseMaxHealth = maxHealth;
         curHealth = maxHealth;
     }
 
@@ -209,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AttackUpdate()
     {
-        if (isAttacking && attackTimer > attackRate)
+        if (isAttacking && attackTimer > (attackRate * GameManager.Instance.attackRateMultiply))
         {
             Shooting();
 
@@ -241,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        rigid.velocity = new Vector2(moveSpeed * movementInputDirection, rigid.velocity.y);
+        rigid.velocity = new Vector2((moveSpeed * GameManager.Instance.moveSpeedMultiply) * movementInputDirection, rigid.velocity.y);
     }
 
     private void Jump()
@@ -257,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
     private void Shooting()
     {
         var bullet = Instantiate(bulletPrefab, shootPos.position, shootPos.rotation);
-        bullet.Init(bulletSpeed, bulletDamage);
+        bullet.Init(bulletSpeed, bulletDamage * GameManager.Instance.damageMultiply);
     }
 
     private IEnumerator DashRoutine()
@@ -309,5 +312,21 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public void OnDamge(float damage)
+    {
+        curHealth -= damage;
+
+        if (curHealth <= 0)
+        {
+            // 게임 오버 로직
+        }
+    }
+
+    public void SetHealth()
+    {
+        maxHealth = baseMaxHealth * GameManager.Instance.healthMultiply;
+        maxHealth = Mathf.Round(maxHealth);
     }
 }

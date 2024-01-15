@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +33,16 @@ public class GameManager : MonoBehaviour
     public GameObject savePowerUiObj;
     public GameObject tumblerUiObj;
     public ParticleSystem missionClearEffect;
+    public TextMeshProUGUI healthText;
+
+    [Space(10)]
+    [Header("아이템 변수")]
+    public float damageMultiply = 1;
+    public float moveSpeedMultiply = 1;
+    public float attackRateMultiply = 1;
+    public float healthMultiply = 1;
+
+    private NPC npc;
 
     private void Awake()
     {
@@ -42,6 +54,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        healthText.text = curPlayer.GetComponent<PlayerMovement>().curHealth + " / " + curPlayer.GetComponent<PlayerMovement>().maxHealth;
     }
 
     public void ShowSWCUI()
@@ -68,7 +85,34 @@ public class GameManager : MonoBehaviour
         SWCUiObj.SetActive(false);
         savePowerUiObj.SetActive(false);
         tumblerUiObj.SetActive(false);
+        npc.GiveItem();
 
         missionClearEffect.Play();
+    }
+
+    public void HealthUpgrade()
+    {
+        healthMultiply = healthMultiply + 0.1f;
+        curPlayer.GetComponent<PlayerMovement>().SetHealth();
+    }
+
+    public void DamageUpgrade()
+    {
+        damageMultiply = damageMultiply + 0.1f;
+    }
+
+    public void MoveSpeedUpgrade()
+    {
+        moveSpeedMultiply = moveSpeedMultiply + 0.1f;
+    }
+
+    public void AttactRateUpgrade()
+    {
+        attackRateMultiply = attackRateMultiply - 0.1f;
+    }
+
+    public void SelectNPC(NPC _npc)
+    {
+        npc = _npc;
     }
 }
