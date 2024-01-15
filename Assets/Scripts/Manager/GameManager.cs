@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject SWCUiObj;
     public GameObject savePowerUiObj;
+    public GameObject tumblerUiObj;
     public ParticleSystem missionClearEffect;
 
     private void Awake()
@@ -55,11 +56,18 @@ public class GameManager : MonoBehaviour
         savePowerUiObj.SetActive(true);
     }
 
+    public void ShowTumblerUI()
+    {
+        isStop = true;
+        tumblerUiObj.SetActive(true);
+    }
+
     public void MissionClear()
     {
         isStop = false;
         SWCUiObj.SetActive(false);
         savePowerUiObj.SetActive(false);
+        tumblerUiObj.SetActive(false);
 
         missionClearEffect.Play();
     }

@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
+            rigid.velocity = Vector2.zero;
             return;
         }
 
@@ -102,6 +103,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isStop)
+        {
+            rigid.velocity = Vector2.zero;
+            return;
+        }
+
         MoveUpdate();
     }
 

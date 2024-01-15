@@ -78,6 +78,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
+            rigid.velocity = Vector2.zero;
             return;
         }
 
@@ -95,6 +96,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
+            rigid.velocity = Vector2.zero;
             return;
         }
 
