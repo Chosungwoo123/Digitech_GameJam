@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public GameObject curPlayer;
+    public bool isStop;
+
+    public GameObject SWCUiObj;
 
     private void Awake()
     {
@@ -36,5 +39,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ShowSWCUI()
+    {
+        isStop = true;
+        SWCUiObj.SetActive(true);
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Paper
+  - Plastic
+  - Can
   layers:
   - Default
   - TransparentFX
@@ -42,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: SWC
+    uniqueID: 2936019885
     locked: 0

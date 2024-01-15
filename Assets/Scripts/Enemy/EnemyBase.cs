@@ -69,6 +69,11 @@ public class EnemyBase : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isStop)
+        {
+            return;
+        }
+
         CheckingTarget();
         CheckMoveDirection();
         CheckGround();
