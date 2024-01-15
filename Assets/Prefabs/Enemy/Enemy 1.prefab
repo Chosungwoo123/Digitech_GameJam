@@ -194,7 +194,7 @@ MonoBehaviour:
   fireRate: 2
   bulletDamage: 10
   bulletCount: 4
-  fireInterval: 0.1
+  fireInterval: 0.2
   bulletPrefab: {fileID: 5221294530022650491, guid: 2dbb3da7f17ec5940b645e62df22a7eb, type: 3}
   shootPos: {fileID: 7363646443474638193}
   bulletSpeed: 10

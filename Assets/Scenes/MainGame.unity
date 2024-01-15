@@ -654,8 +654,9 @@ MonoBehaviour:
   shootPos: {fileID: 490525927}
   bulletPrefab: {fileID: 7850483707519741076, guid: 50cae2477f6c15844a1ab7bf9da62f80, type: 3}
   attackRate: 0.3
-  bulletSpeed: 13
+  bulletSpeed: 20
   bulletDamage: 10
+  jumpEffect: {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
 --- !u!50 &409531904
 Rigidbody2D:
   serializedVersion: 4

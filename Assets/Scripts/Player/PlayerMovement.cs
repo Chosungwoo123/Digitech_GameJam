@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    public GameObject jumpEffect;
+
     private int jumpCounter;
 
     private float movementInputDirection;
@@ -191,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
         if (canJump)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+            Instantiate(jumpEffect, groundCheck.position, Quaternion.identity);
             jumpCounter--;
         }
     }
