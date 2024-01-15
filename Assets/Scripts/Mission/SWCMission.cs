@@ -27,6 +27,7 @@ public class SWCMission : MonoBehaviour
                 Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
             item.transform.parent = transform;
+            item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, -1);
 
             item.Init(this);
         }

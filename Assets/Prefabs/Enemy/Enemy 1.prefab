@@ -182,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scanRadius: 16
   moveSpeed: 6
-  maxHealth: 1000
+  maxHealth: 60
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

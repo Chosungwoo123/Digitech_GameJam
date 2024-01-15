@@ -40,6 +40,19 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    #region Dash Info
+
+    [Space(10)]
+    [Header("Dash Info")]
+    public float dashTime;
+    public KeyCode dashKey = KeyCode.Mouse1;
+    public float dashCoolTime;
+    public float dashSpeed;
+    public float afterImageDistance;
+    public AfterImage afterImagePrefab;
+
+    #endregion
+
     public GameObject jumpEffect;
 
     private int jumpCounter;
@@ -48,19 +61,24 @@ public class PlayerMovement : MonoBehaviour
     private float angle;
     private float attackTimer;
     private float curHealth;
+    private float dashTimer;
 
     private bool isGrounded;
     private bool canJump;
     private bool isAttacking;
     private bool isLookRight;
+    private bool isDash;
+    private bool canDash;
 
     private Rigidbody2D rigid;
+    private SpriteRenderer sr;
 
     private Vector2 mousePos;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         jumpCounter = jumpCount;
         curHealth = maxHealth;
     }
@@ -79,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         AngleUpdate();
         WeaponAming();
         AttackUpdate();
+        DashUpdate();
     }
 
     private void FixedUpdate()
@@ -102,6 +121,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isAttacking = false;
+        }
+
+        if (Input.GetKeyDown(dashKey) && canDash)
+        {
+            StartCoroutine(DashRoutine());
         }
     }
 
@@ -188,8 +212,28 @@ public class PlayerMovement : MonoBehaviour
         attackTimer += Time.deltaTime;
     }
 
+    private void DashUpdate()
+    {
+        if (isDash)
+        {
+            return;
+        }
+
+        dashTimer -= Time.deltaTime;
+
+        if (dashTimer <= 0)
+        {
+            canDash = true;
+        }
+    }
+
     private void MoveUpdate()
     {
+        if (isDash)
+        {
+            return;
+        }
+
         rigid.velocity = new Vector2(moveSpeed * movementInputDirection, rigid.velocity.y);
     }
 
@@ -207,6 +251,50 @@ public class PlayerMovement : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, shootPos.position, shootPos.rotation);
         bullet.Init(bulletSpeed, bulletDamage);
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        float timer = 0;
+
+        isDash = true;
+        canDash = false;
+
+        Vector3 lastAfterImagePos = transform.position;
+
+        Instantiate(afterImagePrefab, lastAfterImagePos, Quaternion.identity).InitAfterImage(sr.sprite, (isLookRight ? 1 : -1));
+
+        movementInputDirection = Input.GetAxisRaw("Horizontal");
+
+        if (movementInputDirection == 0)
+        {
+            movementInputDirection = (isLookRight ? 1 : -1);
+        }
+
+        rigid.velocity = new Vector2(movementInputDirection * dashSpeed, 0);
+
+        while (timer <= dashTime)
+        {
+            if (Vector3.Distance(transform.position, lastAfterImagePos) >= afterImageDistance)
+            {
+                lastAfterImagePos = transform.position;
+
+                var afterImage = Instantiate(afterImagePrefab, lastAfterImagePos, Quaternion.identity);
+                afterImage.InitAfterImage(sr.sprite, (isLookRight ? 1 : -1));
+            }
+
+            timer += Time.deltaTime;
+
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+
+            yield return null;
+        }
+
+        isDash = false;
+
+        dashTimer = dashCoolTime;
+
+        rigid.velocity = Vector3.zero;
     }
 
     private void OnDrawGizmos()

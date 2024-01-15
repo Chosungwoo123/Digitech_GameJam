@@ -96,7 +96,7 @@ public class EnemyBase : MonoBehaviour
 
     private void CheckingTarget()
     {
-        if (player != null)
+        if (player != null && player.transform.position.y >= transform.position.y)
         {
             targetPos = player.gameObject.transform.position;
             startPos.y = transform.position.y;
