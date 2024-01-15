@@ -55,6 +55,7 @@ public class EnemyBase : MonoBehaviour
 
     private Collider2D player;
     private Rigidbody2D rigid;
+    private Animator anim;
 
     private WaitForSeconds fireIntervalSeconds;
 
@@ -65,6 +66,7 @@ public class EnemyBase : MonoBehaviour
         xScale = transform.localScale.x;
         fireIntervalSeconds = new WaitForSeconds(fireInterval);
         curHealth = maxHealth;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -268,6 +270,8 @@ public class EnemyBase : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        anim.SetTrigger("Damage");
 
         Vector3 dir = transform.position - bulletPos;
         Quaternion rot = Quaternion.FromToRotation(Vector2.right, dir.normalized);
