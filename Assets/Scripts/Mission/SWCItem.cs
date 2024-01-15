@@ -25,7 +25,7 @@ public class SWCItem : MonoBehaviour
             Vector2 mousePos;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            this.gameObject.transform.position = new Vector2(mousePos.x - startPosx, mousePos.y - startPosY);
+            this.gameObject.transform.position = new Vector3(mousePos.x - startPosx, mousePos.y - startPosY, -1);
         }
     }
 
