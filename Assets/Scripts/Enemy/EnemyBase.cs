@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class EnemyBase : MonoBehaviour
     public Action dieEvent;
     public Vector3 baseScale;
     public Transform bodyTransform;
+
+    public Image healthImage;
+    public GameObject canvasObj;
+
+    private float baseCanvasScale;
 
     #region Ground Check
 
@@ -87,6 +93,7 @@ public class EnemyBase : MonoBehaviour
         xScale = transform.localScale.x;
         fireIntervalSeconds = new WaitForSeconds(fireInterval);
         curHealth = maxHealth;
+        baseCanvasScale = canvasObj.transform.localScale.x;
         anim = GetComponent<Animator>();
     }
 
@@ -106,6 +113,10 @@ public class EnemyBase : MonoBehaviour
         AngleUpdate();
         WeaponAngleUpdate();
         AttackUpdate();
+
+        #region Health UI Update
+        healthImage.fillAmount = curHealth / maxHealth;
+        #endregion
     }
 
     private void FixedUpdate()
@@ -170,11 +181,13 @@ public class EnemyBase : MonoBehaviour
         if (movementDirection > 0)
         {
             transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
+            canvasObj.transform.localScale = new Vector3(baseCanvasScale, canvasObj.transform.localScale.y, canvasObj.transform.localScale.z);
             isLookRight = true;
         }
         else if (movementDirection < 0)
         {
             transform.localScale = new Vector3(-xScale, transform.localScale.y, transform.localScale.z);
+            canvasObj.transform.localScale = new Vector3(-baseCanvasScale, canvasObj.transform.localScale.y, canvasObj.transform.localScale.z);
             isLookRight = false;
         }
     }
