@@ -37,7 +37,12 @@ public class EnemyBase : MonoBehaviour
 
     #endregion
 
+    #region Effect Info
+
     public GameObject hitEffect;
+    public GameObject dieEffect;
+
+    #endregion
 
     private float movementDirection;
     private float xScale;
@@ -268,6 +273,7 @@ public class EnemyBase : MonoBehaviour
         {
             // Á×´Â ·ÎÁ÷
             Destroy(gameObject);
+            Instantiate(dieEffect, transform.position, Quaternion.identity);
             return;
         }
 
