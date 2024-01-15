@@ -12,15 +12,39 @@ public class EnemyBase : MonoBehaviour
 
     #region Ground Check
 
+    [Space(10)]
+    [Header("Ground Check")]
     public Transform groundCheckPos;
     public float groundCheckRange;
 
     #endregion
 
+    #region Weapon Info
+
+    [Space(10)]
+    [Header("Weapon Info")]
+    public float fireRate;
+    public float bulletDamage;
+    public int bulletCount;
+    public float fireInterval;
+    public EnemyBullet bulletPrefab;
+    public Transform shootPos;
+    public float bulletSpeed;
+    public Transform weaponPivot;
+    public int sectorCount;
+    public bool sectorAttack;
+
+    #endregion
+
     private float movementDirection;
     private float xScale;
+    private float fireTimer;
+    float bulletAngle;
 
     private bool isGrounded;
+    private bool isTargeting;
+    private bool isAttacking;
+    private bool isLookRight;
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -28,11 +52,14 @@ public class EnemyBase : MonoBehaviour
     private Collider2D player;
     private Rigidbody2D rigid;
 
+    private WaitForSeconds fireIntervalSeconds;
+
     private void Start()
     {
         startPos = transform.position;
         rigid = GetComponent<Rigidbody2D>();
         xScale = transform.localScale.x;
+        fireIntervalSeconds = new WaitForSeconds(fireInterval);
     }
 
     private void Update()
@@ -42,6 +69,9 @@ public class EnemyBase : MonoBehaviour
         CheckGround();
         FlipUpdate();
         MoveUpdate();
+        AngleUpdate();
+        WeaponAngleUpdate();
+        AttackUpdate();
     }
 
     private void FixedUpdate()
@@ -56,12 +86,14 @@ public class EnemyBase : MonoBehaviour
             targetPos = player.gameObject.transform.position;
             startPos.y = transform.position.y;
             targetPos.y = transform.position.y;
+            isTargeting = true;
         }
         else
         {
             targetPos = startPos;
             startPos.y = transform.position.y;
             targetPos.y = transform.position.y;
+            isTargeting = false;
         }
     }
 
@@ -73,7 +105,7 @@ public class EnemyBase : MonoBehaviour
         {
             movementDirection = 1;
         }
-        else 
+        else if(dir.x < 0)
         {
             movementDirection = -1;
         }
@@ -98,10 +130,12 @@ public class EnemyBase : MonoBehaviour
         if (movementDirection > 0)
         {
             transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
+            isLookRight = true;
         }
         else if (movementDirection < 0)
         {
             transform.localScale = new Vector3(-xScale, transform.localScale.y, transform.localScale.z);
+            isLookRight = false;
         }
     }
 
@@ -114,6 +148,77 @@ public class EnemyBase : MonoBehaviour
         else
         {
             rigid.velocity = new Vector2(movementDirection * moveSpeed, rigid.velocity.y);
+        }
+    }
+
+    private void AngleUpdate()
+    {
+        Vector2 dir = GameManager.Instance.curPlayer.transform.position - transform.position;
+        bulletAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    }
+
+    private void WeaponAngleUpdate()
+    {
+        if (isTargeting)
+        {
+            weaponPivot.rotation = Quaternion.AngleAxis(bulletAngle + (isLookRight ? 0 : 180), Vector3.forward);
+            shootPos.localRotation = Quaternion.AngleAxis((isLookRight ? 0 : 180), Vector3.up);
+        }
+        else
+        {
+            weaponPivot.rotation = Quaternion.identity;
+        }
+    }
+
+    private void AttackUpdate()
+    {
+        if (isAttacking || !isTargeting)
+        {
+            return;
+        }
+
+        if (isTargeting && fireTimer >= fireRate && !isAttacking)
+        {
+            StartCoroutine(ShootRoutine());
+            fireTimer = 0;
+        }
+
+        fireTimer += Time.deltaTime;
+    }
+
+    private IEnumerator ShootRoutine()
+    {
+        isAttacking = true;
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            if (sectorAttack)
+            {
+                SectorFromTargetShoot(sectorCount, 60);
+            }
+            else
+            {
+                var bullet = Instantiate(bulletPrefab, shootPos.position, Quaternion.Euler(0,0,bulletAngle));
+                bullet.Init(bulletSpeed, bulletDamage);
+            }
+
+            yield return fireIntervalSeconds;
+        }   
+
+        isAttacking = false;
+    }
+
+    private void SectorFromTargetShoot(int count, float central)
+    {
+        float amount = central / (count - 1);
+        float z = central / -2f + (int)bulletAngle;
+
+        for (int i = 0; i < count; i++)
+        {
+            Quaternion rot = Quaternion.Euler(0, 0, z);
+            var bullet = Instantiate(bulletPrefab, shootPos.position, rot);
+            bullet.Init(bulletSpeed, bulletDamage);
+            z += amount;
         }
     }
 

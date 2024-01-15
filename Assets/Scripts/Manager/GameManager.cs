@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public Camera mainCamera;
+    public GameObject curPlayer;
 
     private void Awake()
     {
