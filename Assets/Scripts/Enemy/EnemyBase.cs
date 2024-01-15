@@ -37,6 +37,8 @@ public class EnemyBase : MonoBehaviour
 
     #endregion
 
+    public GameObject hitEffect;
+
     private float movementDirection;
     private float xScale;
     private float fireTimer;
@@ -246,13 +248,19 @@ public class EnemyBase : MonoBehaviour
         Gizmos.DrawRay(groundCheckPos.position, Vector3.down * groundCheckRange);
     }
 
-    public void OnDamage(float damage)
+    public void OnDamage(float damage, Vector3 bulletPos)
     {
         curHealth -= damage;
 
         if (curHealth <= 0)
         {
             // Á×´Â ·ÎÁ÷
+            Destroy(gameObject);
+            return;
         }
+
+        Vector3 dir = transform.position - bulletPos;
+        Quaternion rot = Quaternion.FromToRotation(Vector2.right, dir.normalized);
+        Instantiate(hitEffect, transform.position, rot);
     }
 }

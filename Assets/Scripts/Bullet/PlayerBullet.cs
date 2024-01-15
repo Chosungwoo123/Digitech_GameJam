@@ -29,7 +29,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyBase>().OnDamage(damage);
+            collision.GetComponent<EnemyBase>().OnDamage(damage, transform.position);
             SpawnParticle(transform.position, transform.position - collision.transform.position);
             Vector2 dir = collision.transform.position - transform.position;
             impulseSource.GenerateImpulseWithVelocity(-dir * shakeForce);
