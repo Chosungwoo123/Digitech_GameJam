@@ -220,7 +220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 426.18, y: -50}
+  m_AnchoredPosition: {x: 92.81998, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259135322
@@ -2050,6 +2050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833509928}
   - component: {fileID: 833509927}
+  - component: {fileID: 833509929}
   m_Layer: 0
   m_Name: BackGround
   m_TagString: Untagged
@@ -2117,13 +2118,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833509926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.27, y: 0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &833509929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833509926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf0d51b7a4be3a419c5192f2e9187c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallacEffectMulriplier: {x: 0.75, y: 0.8}
 --- !u!1 &864588129
 GameObject:
   m_ObjectHideFlags: 0
