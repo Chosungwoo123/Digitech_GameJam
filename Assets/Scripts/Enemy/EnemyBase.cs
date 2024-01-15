@@ -13,6 +13,8 @@ public class EnemyBase : MonoBehaviour
     public LayerMask groundLayer;
 
     public Action dieEvent;
+    public Vector3 baseScale;
+    public Transform bodyTransform;
 
     #region Ground Check
 
@@ -67,6 +69,11 @@ public class EnemyBase : MonoBehaviour
 
     private WaitForSeconds fireIntervalSeconds;
 
+    private void Awake()
+    {
+        startPos = transform.position;
+    }
+
     private void Start()
     {
         Init();
@@ -74,8 +81,8 @@ public class EnemyBase : MonoBehaviour
 
     public void Init()
     {
-        transform.rotation = Quaternion.identity;
-        startPos = transform.position;
+        transform.localScale = baseScale;
+        bodyTransform.localScale = new Vector3(1, 1, 1);
         rigid = GetComponent<Rigidbody2D>();
         xScale = transform.localScale.x;
         fireIntervalSeconds = new WaitForSeconds(fireInterval);
@@ -114,7 +121,7 @@ public class EnemyBase : MonoBehaviour
 
     private void CheckingTarget()
     {
-        if (player != null && player.transform.position.y >= transform.position.y)
+        if (player != null && player.transform.position.y >= transform.position.y - 0.5f)
         {
             targetPos = player.gameObject.transform.position;
             startPos.y = transform.position.y;

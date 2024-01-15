@@ -145,7 +145,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.0076, y: 2.0076, z: 2.0076}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7363646445169949555}
   - {fileID: 7363646445094933246}
@@ -221,6 +221,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  baseScale: {x: 2.0076, y: 2.0076, z: 2.0076}
+  bodyTransform: {fileID: 1801803663868290167}
   groundCheckPos: {fileID: 7363646445169949555}
   groundCheckRange: 1.9
   fireRate: 2
