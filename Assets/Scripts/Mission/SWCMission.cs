@@ -26,6 +26,8 @@ public class SWCMission : MonoBehaviour
                 spawnPoints[Random.Range(0, spawnPoints.Length)].position, 
                 Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
+            item.transform.parent = transform;
+
             item.Init(this);
         }
     }
@@ -42,6 +44,8 @@ public class SWCMission : MonoBehaviour
         if (successCount == itemCount)
         {
             Debug.Log("Å¬¸®¾î");
+            GameManager.Instance.MissionClear();
+            Destroy(gameObject);
         }
     }
 

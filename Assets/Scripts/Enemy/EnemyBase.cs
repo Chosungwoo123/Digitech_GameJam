@@ -86,6 +86,11 @@ public class EnemyBase : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isStop)
+        {
+            return;
+        }
+
         ScanPlayer();
     }
 

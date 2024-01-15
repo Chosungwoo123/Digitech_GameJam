@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool isStop;
 
     public GameObject SWCUiObj;
+    public ParticleSystem missionClearEffect;
 
     private void Awake()
     {
@@ -45,5 +46,13 @@ public class GameManager : MonoBehaviour
     {
         isStop = true;
         SWCUiObj.SetActive(true);
+    }
+
+    public void MissionClear()
+    {
+        isStop = false;
+        SWCUiObj.SetActive(false);
+
+        missionClearEffect.Play();
     }
 }
