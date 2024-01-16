@@ -25,7 +25,7 @@ public class Boss : MonoBehaviour
         curHealth = maxHealth;
         anim = GetComponent<Animator>();
 
-        StartCoroutine(Pattern02());
+        StartCoroutine(ThinkingPattern());
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(Random.Range(5, 13));
 
-        int randomPattern = Random.Range(0, 3);
+        int randomPattern = Random.Range(0, 5);
 
         switch (randomPattern)
         {
@@ -52,6 +52,12 @@ public class Boss : MonoBehaviour
                 break;
             case 2:
                 StartCoroutine(Pattern03());
+                break;
+            case 3:
+                StartCoroutine(Pattern04());
+                break;
+            case 4:
+                StartCoroutine(Pattern05());
                 break;
         }
     }
@@ -104,7 +110,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 4);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 6);
             }
 
             yield return interval;
@@ -132,7 +138,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 4);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 6);
             }
 
             yield return interval;
@@ -150,15 +156,80 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         int shootCount = 6;
-        int bulletShootCount = 10;
+        int bulletShootCount = 6;
+
+        WaitForSeconds interval = new WaitForSeconds(0.2f);
 
         for (int i = 0; i < shootCount; i++)
         {
             for (int j = 0; j < bulletShootCount; j++)
             {
-
+                SectorFromTargetShoot(6, 80);
+                yield return interval;
             }
+
+            yield return new WaitForSeconds(0.8f);
         }
+
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(ThinkingPattern());
+    }
+
+    private IEnumerator Pattern05()
+    {
+        transform.DOMove(new Vector3(35, 21.5f), 0.8f);
+
+        yield return new WaitForSeconds(1f);
+
+        int shootCount = 20;
+        int bulletCount = 10;
+
+        float offset = 0;
+
+        WaitForSeconds interval = new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < shootCount; i++)
+        {
+            for (int j = 0; j < 360; j += 360 / bulletCount)
+            {
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, 10, true, 5, 6);
+            }
+
+            offset += 6f;
+
+            yield return interval;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        interval = new WaitForSeconds(0.3f);
+        transform.DOMove(new Vector3(-26, -2), 3);
+
+        bulletCount = 8;
+        shootCount = 10;
+
+        for (int i = 0; i < shootCount; i++)
+        {
+            for (int j = 0; j < 360; j += 360 / bulletCount)
+            {
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(15, 10, true, 5, 6);
+            }
+
+            yield return interval;
+        }
+
+        shootCount = 20;
+        interval = new WaitForSeconds(0.15f);
+        for (int i = 0; i < shootCount; i++)
+        {
+            SectorFromTargetShoot(6, 80);
+            yield return interval;
+        }
+
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(ThinkingPattern());
     }
 
     private void SectorFromTargetShoot(int count, float central)
@@ -172,7 +243,7 @@ public class Boss : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Quaternion rot = Quaternion.Euler(0, 0, z);
-            Instantiate(bulletPrefab, transform.position, rot);
+            Instantiate(bulletPrefab, transform.position, rot).Init(10, 10, true, 5, 4);
             z += amount;
         }
     }
