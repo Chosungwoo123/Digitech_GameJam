@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     public AudioClip bgm;
     public AudioClip npcBgm;
     public AudioClip bossBgm;
+    public AudioClip missionClearSound;
 
     private int busLevel;
     private int treeLevel;
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         npc.GiveItem();
         missionCounter++;
         SoundManager.Instance.PlayMusic(bgm);
+        SoundManager.Instance.PlaySound(missionClearSound);
 
         if (missionCounter >= missionCount)
         {

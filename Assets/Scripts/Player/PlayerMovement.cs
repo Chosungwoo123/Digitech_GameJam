@@ -58,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float invincibilityTime;
 
+    public AudioClip weaponSound;
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
+
     private int jumpCounter;
 
     private float movementInputDirection;
@@ -289,6 +293,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator DashRoutine()
     {
         GameManager.Instance.cameraShake.ShakeCamera(20, dashTime);
+        SoundManager.Instance.PlaySound(dashSound);
 
         float timer = 0;
 
