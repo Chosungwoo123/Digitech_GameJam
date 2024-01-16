@@ -135,7 +135,7 @@ public class EnemyBase : MonoBehaviour
 
     private void CheckingTarget()
     {
-        if (player != null && player.transform.position.y >= transform.position.y - 0.5f)
+        if (player != null && player.transform.position.y >= transform.position.y - 1f)
         {
             targetPos = player.gameObject.transform.position;
             startPos.y = transform.position.y;
@@ -197,7 +197,7 @@ public class EnemyBase : MonoBehaviour
 
     private void MoveUpdate()
     {
-        if (Vector3.Distance(transform.position, targetPos) < 0.1f || !isGrounded)
+        if (Mathf.Abs(transform.position.x - targetPos.x) < 0.1f || !isGrounded)
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
