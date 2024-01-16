@@ -164,7 +164,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < bulletShootCount; j++)
             {
-                SectorFromTargetShoot(6, 80);
+                SectorFromTargetShoot(7, 80);
                 yield return interval;
             }
 
@@ -206,7 +206,7 @@ public class Boss : MonoBehaviour
         interval = new WaitForSeconds(0.3f);
         transform.DOMove(new Vector3(-26, -2), 3);
 
-        bulletCount = 8;
+        bulletCount = 30;
         shootCount = 10;
 
         for (int i = 0; i < shootCount; i++)
@@ -223,7 +223,7 @@ public class Boss : MonoBehaviour
         interval = new WaitForSeconds(0.15f);
         for (int i = 0; i < shootCount; i++)
         {
-            SectorFromTargetShoot(6, 80);
+            SectorFromTargetShoot(7, 80);
             yield return interval;
         }
 
