@@ -481,6 +481,7 @@ MonoBehaviour:
   healthImage: {fileID: 196023807}
   canvasObj: {fileID: 829368709}
   damagePopup: {fileID: 1295973102043214699, guid: b09624bb5f07b73408b8b4962bf08074, type: 3}
+  hitSound: {fileID: 8300000, guid: cd411df74e50ee945aad2405491178f9, type: 3}
   groundCheckPos: {fileID: 7363646445169949555}
   groundCheckRange: 1.9
   fireRate: 2

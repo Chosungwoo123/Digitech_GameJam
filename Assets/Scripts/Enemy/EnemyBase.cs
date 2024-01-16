@@ -23,6 +23,8 @@ public class EnemyBase : MonoBehaviour
 
     public DamageNumber damagePopup;
 
+    public AudioClip hitSound;
+
     private float baseCanvasScale = 0.01f;
 
     #region Ground Check
@@ -311,6 +313,8 @@ public class EnemyBase : MonoBehaviour
         curHealth -= damage;
 
         damagePopup.Spawn(transform.position + Vector3.up, damage);
+
+        SoundManager.Instance.PlaySound(hitSound);
 
         if (curHealth <= 0)
         {
