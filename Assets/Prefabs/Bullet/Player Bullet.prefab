@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   enemyHitEffect: {fileID: 2966912869077418065, guid: 3ffae1e631012a4489cb0160a97c3128, type: 3}
-  groundHitEffect: {fileID: 2966912869077418065, guid: c16c3c7697807f84ba0893684e167aa2, type: 3}
+  groundHitEffect: {fileID: 2966912869077418065, guid: 8138273a0224cf44abe05bc3094f0a89, type: 3}
   shakeForce: 0.8
 --- !u!114 &2476632013285997586
 MonoBehaviour:
