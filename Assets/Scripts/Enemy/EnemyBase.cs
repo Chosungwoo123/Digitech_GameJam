@@ -318,6 +318,7 @@ public class EnemyBase : MonoBehaviour
             Instantiate(dieEffect, transform.position, Quaternion.identity);
             dieEvent?.Invoke();
             gameObject.SetActive(false);
+            GameManager.Instance.curPlayer.GetComponent<PlayerMovement>().HealHealth(4);
             return;
         }
 

@@ -64,13 +64,20 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI treeLevelText;
     public GameObject tumblerObj;
     public TextMeshProUGUI tumblerLevelText;
+    public GameObject strawObj;
+    public TextMeshProUGUI strawLevelText;
 
     [Space(10)]
     public GameObject boss;
 
+    public AudioClip bgm;
+    public AudioClip npcBgm;
+    public AudioClip bossBgm;
+
     private int busLevel;
     private int treeLevel;
     private int tumblerLevel;
+    private int strawLevel;
 
     private void Awake()
     {
@@ -82,6 +89,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic(bgm);
     }
 
     private void Update()
@@ -115,6 +127,7 @@ public class GameManager : MonoBehaviour
         tumblerUiObj.SetActive(false);
         npc.GiveItem();
         missionCounter++;
+        SoundManager.Instance.PlayMusic(bgm);
 
         if (missionCounter >= missionCount)
         {
@@ -154,23 +167,27 @@ public class GameManager : MonoBehaviour
 
     public void AttactRateUpgrade()
     {
+        strawObj.SetActive(true);
+        strawLevel++;
+        strawLevelText.text = "X" + strawLevel;
+
         attackRateMultiply = attackRateMultiply - 0.1f;
     }
 
     public void SelectNPC(NPC _npc)
     {
         npc = _npc;
+        SoundManager.Instance.PlayMusic(npcBgm);
     }
 
     private void ShowBoss()
     {
-        Debug.Log("¤»¤»");
-
         for (int i = enemySpanwers.Length - 1; i >= 0; i--)
         {
             Destroy(enemySpanwers[i].gameObject);
         }
 
+        SoundManager.Instance.PlayMusic(bossBgm);
         vc.m_Lens.OrthographicSize = 30;
         bg.transform.localScale = new Vector3(2f, 2f, 2f);
         boss.SetActive(true);

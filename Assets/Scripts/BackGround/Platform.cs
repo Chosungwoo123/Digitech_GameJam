@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Platform : MonoBehaviour
 {
     private PlatformEffector2D platformEffector;
@@ -22,6 +21,11 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isStop)
+        {
+            return;
+        }
+
         if (isEnter && Input.GetKeyDown(KeyCode.S))
         {
             platformEffector.rotationalOffset = 180;

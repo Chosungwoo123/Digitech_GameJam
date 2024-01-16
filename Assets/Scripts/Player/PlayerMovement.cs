@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject jumpEffect;
 
+    public float invincibilityTime;
+
     private int jumpCounter;
 
     private float movementInputDirection;
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDash;
     private bool canDash;
     private bool isWalk;
+    private bool isInvincibility;
 
     private Rigidbody2D rigid;
     private SpriteRenderer sr;
@@ -93,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
-            rigid.velocity = Vector2.zero;
+            rigid.velocity = Vector3.zero;
             return;
         }
 
@@ -112,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
-            rigid.velocity = Vector2.zero;
+            rigid.velocity = Vector3.zero;
             return;
         }
 
@@ -307,6 +310,13 @@ public class PlayerMovement : MonoBehaviour
 
         while (timer <= dashTime)
         {
+            if (GameManager.Instance.isStop)
+            {
+                rigid.velocity = Vector3.zero;
+                isDash = false;
+                yield break;
+            }
+
             if (Vector3.Distance(transform.position, lastAfterImagePos) >= afterImageDistance)
             {
                 lastAfterImagePos = transform.position;
@@ -338,22 +348,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDamage(float damage)
     {
-        if (isDash || GameManager.Instance.isStop)
+        if (isDash || GameManager.Instance.isStop || isInvincibility)
         {
             return;
         }
 
-        curHealth -= damage;
+        curHealth = Mathf.Max(0, curHealth - damage);
 
         if (curHealth <= 0)
         {
             // 게임 오버 로직
         }
+
+        GameManager.Instance.cameraShake.ShakeCamera(20, 0.3f);
+
+        StartCoroutine(InvincibilityRoutine());
+    }
+
+    private IEnumerator InvincibilityRoutine()
+    {
+        isInvincibility = true;
+        sr.color = new Vector4(1, 1, 1, 0.5f);
+
+        yield return new WaitForSeconds(invincibilityTime);
+
+        isInvincibility = false;
+        sr.color = new Vector4(1, 1, 1, 1);
     }
 
     public void SetHealth()
     {
         maxHealth = baseMaxHealth * GameManager.Instance.healthMultiply;
         maxHealth = Mathf.Round(maxHealth);
+    }
+
+    public void HealHealth(float heal)
+    {
+        curHealth = Mathf.Min(maxHealth, curHealth + heal);
     }
 }

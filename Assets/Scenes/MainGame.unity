@@ -2473,7 +2473,12 @@ MonoBehaviour:
   treeLevelText: {fileID: 1284108838}
   tumblerObj: {fileID: 2116301168}
   tumblerLevelText: {fileID: 8534162}
-  boss: {fileID: 0}
+  strawObj: {fileID: 1410796003}
+  strawLevelText: {fileID: 1323590713}
+  boss: {fileID: 101449514}
+  bgm: {fileID: 8300000, guid: da839de4ffd8f13468b9fcd17cf129d5, type: 3}
+  npcBgm: {fileID: 8300000, guid: d94d494354dfeb74b8c5f5dae2f29a68, type: 3}
+  bossBgm: {fileID: 8300000, guid: 1e782bda2cce00a4bbe6c99b230d06dd, type: 3}
 --- !u!4 &388170530
 Transform:
   m_ObjectHideFlags: 0
@@ -2545,6 +2550,7 @@ MonoBehaviour:
   afterImageDistance: 1
   afterImagePrefab: {fileID: 3821641227127123856, guid: 8b003e0e50a127945b3298da99515226, type: 3}
   jumpEffect: {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+  invincibilityTime: 3
 --- !u!50 &409531904
 Rigidbody2D:
   serializedVersion: 4
@@ -2591,7 +2597,7 @@ Transform:
   m_GameObject: {fileID: 409531902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.68, y: -22.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1324615450}
@@ -8640,7 +8646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8ea5adeeed8dc1b45b9d0af2bd319296, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
