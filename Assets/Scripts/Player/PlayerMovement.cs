@@ -281,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
             Instantiate(jumpEffect, groundCheck.position, Quaternion.identity);
             jumpCounter--;
+            SoundManager.Instance.PlaySound(jumpSound);
         }
     }
 
@@ -288,6 +289,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, shootPos.position, shootPos.rotation);
         bullet.Init(bulletSpeed, bulletDamage * GameManager.Instance.damageMultiply);
+        SoundManager.Instance.PlaySound(weaponSound);
     }
 
     private IEnumerator DashRoutine()

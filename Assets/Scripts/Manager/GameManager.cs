@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     public AudioClip npcBgm;
     public AudioClip bossBgm;
     public AudioClip missionClearSound;
+    public AudioClip itemSound;
 
     private int busLevel;
     private int treeLevel;
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
         tumblerObj.SetActive(true);
         tumblerLevel++;
         tumblerLevelText.text = "X" + tumblerLevel;
+        SoundManager.Instance.PlaySound(itemSound);
 
         healthMultiply = healthMultiply + 0.1f;
         curPlayer.GetComponent<PlayerMovement>().SetHealth();
@@ -154,6 +156,7 @@ public class GameManager : MonoBehaviour
         treeObj.SetActive(true);
         treeLevel++;
         treeLevelText.text = "X" + treeLevel;
+        SoundManager.Instance.PlaySound(itemSound);
 
         damageMultiply = damageMultiply + 0.1f;
     }
@@ -163,6 +166,7 @@ public class GameManager : MonoBehaviour
         busObj.SetActive(true);
         busLevel++;
         busLevelText.text = "X" + busLevel;
+        SoundManager.Instance.PlaySound(itemSound);
 
         moveSpeedMultiply = moveSpeedMultiply + 0.1f;
     }
@@ -172,6 +176,7 @@ public class GameManager : MonoBehaviour
         strawObj.SetActive(true);
         strawLevel++;
         strawLevelText.text = "X" + strawLevel;
+        SoundManager.Instance.PlaySound(itemSound);
 
         attackRateMultiply = attackRateMultiply - 0.1f;
     }

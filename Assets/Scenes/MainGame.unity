@@ -2496,6 +2496,7 @@ MonoBehaviour:
   npcBgm: {fileID: 8300000, guid: d94d494354dfeb74b8c5f5dae2f29a68, type: 3}
   bossBgm: {fileID: 8300000, guid: 1e782bda2cce00a4bbe6c99b230d06dd, type: 3}
   missionClearSound: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+  itemSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
 --- !u!4 &388170530
 Transform:
   m_ObjectHideFlags: 0
@@ -2568,8 +2569,8 @@ MonoBehaviour:
   afterImagePrefab: {fileID: 3821641227127123856, guid: 8b003e0e50a127945b3298da99515226, type: 3}
   jumpEffect: {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
   invincibilityTime: 3
-  weaponSound: {fileID: 0}
-  jumpSound: {fileID: 0}
+  weaponSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  jumpSound: {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
   dashSound: {fileID: 8300000, guid: 40b51f52bbd31674199bac4b427ad30d, type: 3}
 --- !u!50 &409531904
 Rigidbody2D:

@@ -38,7 +38,7 @@ public class Boss : MonoBehaviour
     {
         transform.DOMove(new Vector3(0, 12, 0), 0.5f);
 
-        yield return new WaitForSeconds(Random.Range(5, 13));
+        yield return new WaitForSeconds(Random.Range(5, 8));
 
         int randomPattern = Random.Range(0, 5);
 
@@ -79,8 +79,8 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, 10, true, 5, 4);
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, -(j + offset))).Init(10, 10, true, 5, 4);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, -(j + offset))).Init(10, 10, true, 5, 6);
             }
 
             yield return interval;
