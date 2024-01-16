@@ -28,9 +28,9 @@ public class TitleManager : MonoBehaviour
 
         fadeOutImage.color = new Color(fadeOutImage.color.r, fadeOutImage.color.g, fadeOutImage.color.b, curAlpha);
 
-        while (temp <= 0.5f)
+        while (temp <= 1)
         {
-            curAlpha += Time.deltaTime * targetAlpha / 0.5f;
+            curAlpha += Time.deltaTime * targetAlpha / 1;
 
             fadeOutImage.color = new Color(fadeOutImage.color.r, fadeOutImage.color.g, fadeOutImage.color.b, curAlpha);
 

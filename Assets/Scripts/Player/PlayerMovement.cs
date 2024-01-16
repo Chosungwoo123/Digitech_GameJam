@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
-            rigid.velocity = Vector3.zero;
+            rigid.velocity = new Vector2(0, 0);
             return;
         }
 
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.isStop)
         {
-            rigid.velocity = Vector3.zero;
+            rigid.velocity = new Vector2(0, 0);
             return;
         }
 
