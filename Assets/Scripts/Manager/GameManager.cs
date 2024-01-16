@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
     public GameObject tumblerObj;
     public TextMeshProUGUI tumblerLevelText;
 
+    [Space(10)]
+    public GameObject boss;
+
     private int busLevel;
     private int treeLevel;
     private int tumblerLevel;
@@ -170,5 +173,6 @@ public class GameManager : MonoBehaviour
 
         vc.m_Lens.OrthographicSize = 30;
         bg.transform.localScale = new Vector3(2f, 2f, 2f);
+        boss.SetActive(true);
     }
 }
