@@ -285,6 +285,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator DashRoutine()
     {
+        GameManager.Instance.cameraShake.ShakeCamera(20, dashTime);
+
         float timer = 0;
 
         isDash = true;
@@ -336,7 +338,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDamage(float damage)
     {
-        if (isDash)
+        if (isDash || GameManager.Instance.isStop)
         {
             return;
         }

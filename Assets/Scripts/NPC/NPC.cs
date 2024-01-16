@@ -10,6 +10,11 @@ public class NPC : MonoBehaviour
 
     private bool isEnter;
 
+    private void Start()
+    {
+        GameManager.Instance.missionCount++;
+    }
+
     private void Update()
     {
         if (GameManager.Instance.isStop)

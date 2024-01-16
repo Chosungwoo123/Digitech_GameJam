@@ -10,6 +10,7 @@ TagManager:
   - Plastic
   - Can
   - FxTemporaire
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Enemy
   - Enemy Ground Col
-  - 
+  - Boss
   - 
   - 
   - 
