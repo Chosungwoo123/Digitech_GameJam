@@ -62,6 +62,11 @@ public class Dialogue : MonoBehaviour
 
         isTypingEnd = true;
     }
+
+    public void Skip()
+    {
+        SceneManager.LoadScene(nextScene);
+    }
 }
 
 [System.Serializable]
