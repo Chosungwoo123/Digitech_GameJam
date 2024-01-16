@@ -71,9 +71,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isLookRight;
     private bool isDash;
     private bool canDash;
+    private bool isWalk;
 
     private Rigidbody2D rigid;
     private SpriteRenderer sr;
+    private Animator anim;
 
     private Vector2 mousePos;
 
@@ -84,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         jumpCounter = jumpCount;
         baseMaxHealth = maxHealth;
         curHealth = maxHealth;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -102,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         WeaponAming();
         AttackUpdate();
         DashUpdate();
+        AnimationUpdate();
     }
 
     private void FixedUpdate()
@@ -118,6 +122,15 @@ public class PlayerMovement : MonoBehaviour
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
+
+        if (movementInputDirection != 0 && !isDash)
+        {
+            isWalk = true;
+        }
+        else
+        {
+            isWalk = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -235,6 +248,13 @@ public class PlayerMovement : MonoBehaviour
         {
             canDash = true;
         }
+    }
+
+    private void AnimationUpdate()
+    {
+        anim.SetBool("isWalk", isWalk);
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("yVel", rigid.velocity.y);
     }
 
     private void MoveUpdate()
