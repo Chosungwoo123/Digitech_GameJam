@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject tumblerUiObj;
     public ParticleSystem missionClearEffect;
     public TextMeshProUGUI healthText;
+    public Image fadeImage;
 
     [Space(10)]
     [Header("아이템 변수")]
@@ -198,5 +200,34 @@ public class GameManager : MonoBehaviour
         vc.m_Lens.OrthographicSize = 30;
         bg.transform.localScale = new Vector3(2f, 2f, 2f);
         boss.SetActive(true);
+    }
+
+    public void GameClear()
+    {
+        StartCoroutine(GameClearRoutine());
+    }
+
+    private IEnumerator GameClearRoutine()
+    {
+        float targetAlpha = 1;
+        float curAlpha = 0;
+        float temp = 0;
+
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, curAlpha);
+        cameraShake.ShakeCamera(20, 5);
+
+        while (temp <= 5)
+        {
+            curAlpha += Time.deltaTime * targetAlpha / 5;
+
+            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, curAlpha);
+
+            temp += Time.deltaTime;
+
+            yield return null;
+        }
+
+        SoundManager.Instance.StopMusic();
+        SceneManager.LoadScene("OutroScene");
     }
 }

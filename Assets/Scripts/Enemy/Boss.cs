@@ -16,6 +16,8 @@ public class Boss : MonoBehaviour
     public GameObject hitEffect;
     public TextMeshProUGUI healthText;
 
+    public AudioClip hitSound;
+
     private float curHealth;
 
     private Animator anim;
@@ -253,11 +255,13 @@ public class Boss : MonoBehaviour
         curHealth -= damage;
 
         damagePopup.Spawn((Vector2)transform.position + (Random.insideUnitCircle * Random.Range(0, 7)), damage);
+        SoundManager.Instance.PlaySound(hitSound);
 
         if (curHealth <= 0)
         {
             // Á×´Â ·ÎÁ÷
             gameObject.SetActive(false);
+            GameManager.Instance.GameClear();
             return;
         }
 

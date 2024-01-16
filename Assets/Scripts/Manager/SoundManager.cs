@@ -88,6 +88,11 @@ public class SoundManager : MonoBehaviour
         musicSource.Play();
     }
 
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
     public void SetMusicVolume(float value)
     {
         bgmVolume = value;
