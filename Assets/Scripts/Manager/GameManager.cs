@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem missionClearEffect;
     public TextMeshProUGUI healthText;
     public Image fadeImage;
+    public GameObject gameOverObj;
 
     [Space(10)]
     [Header("아이템 변수")]
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     public AudioClip bossBgm;
     public AudioClip missionClearSound;
     public AudioClip itemSound;
+    public AudioClip gameOverBgm;
 
     private int busLevel;
     private int treeLevel;
@@ -229,5 +231,17 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Instance.StopMusic();
         SceneManager.LoadScene("OutroScene");
+    }
+
+    public void GameOver()
+    {
+        gameOverObj.SetActive(true);
+        isStop = true;
+        SoundManager.Instance.PlayMusic(gameOverBgm);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

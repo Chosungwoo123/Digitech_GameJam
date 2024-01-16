@@ -364,7 +364,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (curHealth <= 0)
         {
-            // 게임 오버 로직
+            GameManager.Instance.GameOver();
         }
 
         GameManager.Instance.cameraShake.ShakeCamera(20, 0.3f);
