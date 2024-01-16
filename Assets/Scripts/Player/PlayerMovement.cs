@@ -334,7 +334,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
-    public void OnDamge(float damage)
+    public void OnDamage(float damage)
     {
         curHealth -= damage;
 

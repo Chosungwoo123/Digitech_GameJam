@@ -47,6 +47,7 @@ public class EnemyBase : MonoBehaviour
     public float bulletSpeed;
     public Transform weaponPivot;
     public int sectorCount;
+    public float centralAmount;
     public bool sectorAttack;
 
     #endregion
@@ -249,7 +250,7 @@ public class EnemyBase : MonoBehaviour
         {
             if (sectorAttack)
             {
-                SectorFromTargetShoot(sectorCount, 60);
+                SectorFromTargetShoot(sectorCount, centralAmount);
             }
             else
             {

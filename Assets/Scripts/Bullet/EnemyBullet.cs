@@ -8,11 +8,18 @@ public class EnemyBullet : MonoBehaviour
 
     public void Init(float speed, float damage)
     {
+        this.damage = damage;
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerMovement>().OnDamage(damage);
+            Destroy(gameObject);
+        }
+
         if (collision.CompareTag("Ground"))
         {
             Destroy(gameObject);
