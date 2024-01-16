@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using DamageNumbersPro;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class EnemyBase : MonoBehaviour
     public Image healthImage;
     public GameObject canvasObj;
 
-    private float baseCanvasScale;
+    public DamageNumber damagePopup;
+
+    private float baseCanvasScale = 0.01f;
 
     #region Ground Check
 
@@ -93,7 +96,6 @@ public class EnemyBase : MonoBehaviour
         xScale = transform.localScale.x;
         fireIntervalSeconds = new WaitForSeconds(fireInterval);
         curHealth = maxHealth;
-        baseCanvasScale = canvasObj.transform.localScale.x;
         anim = GetComponent<Animator>();
     }
 
@@ -299,6 +301,8 @@ public class EnemyBase : MonoBehaviour
     public void OnDamage(float damage, Vector3 bulletPos)
     {
         curHealth -= damage;
+
+        damagePopup.Spawn(transform.position + Vector3.up, damage);
 
         if (curHealth <= 0)
         {

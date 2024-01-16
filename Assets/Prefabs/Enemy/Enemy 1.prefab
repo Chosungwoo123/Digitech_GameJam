@@ -480,6 +480,7 @@ MonoBehaviour:
   bodyTransform: {fileID: 1801803663868290167}
   healthImage: {fileID: 196023807}
   canvasObj: {fileID: 829368709}
+  damagePopup: {fileID: 1295973102043214699, guid: b09624bb5f07b73408b8b4962bf08074, type: 3}
   groundCheckPos: {fileID: 7363646445169949555}
   groundCheckRange: 1.9
   fireRate: 2
