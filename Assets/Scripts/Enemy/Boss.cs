@@ -1,19 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DamageNumbersPro;
+using TMPro;
+using DG.Tweening;
 
 public class Boss : MonoBehaviour
 {
     public float maxHealth;
     public EnemyBullet bulletPrefab;
+    public Image healthImage;
+
+    public DamageNumber damagePopup;
+    public GameObject hitEffect;
+    public TextMeshProUGUI healthText;
 
     private float curHealth;
+
+    private Animator anim;
 
     private void Start()
     {
         curHealth = maxHealth;
+        anim = GetComponent<Animator>();
+    }
 
-        StartCoroutine(Pattern01());
+    private void Update()
+    {
+        healthImage.fillAmount = curHealth / maxHealth;
+        healthText.text = curHealth + " / " + maxHealth;
     }
 
     private IEnumerator Pattern01()
@@ -39,8 +55,23 @@ public class Boss : MonoBehaviour
         }
     }
 
-    public void OnDamage(float damage)
+    public void OnDamage(float damage, Vector3 bulletPos)
     {
         curHealth -= damage;
+
+        damagePopup.Spawn((Vector2)transform.position + (Random.insideUnitCircle * Random.Range(0, 7)), damage);
+
+        if (curHealth <= 0)
+        {
+            // Á×´Â ·ÎÁ÷
+            gameObject.SetActive(false);
+            return;
+        }
+
+        anim.SetTrigger("Damage");
+
+        Vector3 dir = transform.position - bulletPos;
+        Quaternion rot = Quaternion.FromToRotation(Vector2.right, dir.normalized);
+        Instantiate(hitEffect, transform.position, rot);
     }
 }

@@ -40,5 +40,13 @@ public class PlayerBullet : MonoBehaviour
             Instantiate(groundHitEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        if (collision.CompareTag("Boss"))
+        {
+            collision.GetComponent<Boss>().OnDamage(damage, transform.position);
+            SpawnParticle(transform.position, transform.position - collision.transform.position);
+            Vector2 dir = collision.transform.position - transform.position;
+            impulseSource.GenerateImpulseWithVelocity(-dir * 0.2f);
+            Destroy(gameObject);
+        }
     }
 }
