@@ -69,6 +69,7 @@ public class EnemyBase : MonoBehaviour
     private bool isTargeting;
     private bool isAttacking;
     private bool isLookRight;
+    private bool isWalk;
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -120,6 +121,10 @@ public class EnemyBase : MonoBehaviour
         #region Health UI Update
         healthImage.fillAmount = curHealth / maxHealth;
         #endregion
+
+        #region Animation Update
+        anim.SetBool("isWalk", isWalk);
+        #endregion
     }
 
     private void FixedUpdate()
@@ -135,7 +140,7 @@ public class EnemyBase : MonoBehaviour
 
     private void CheckingTarget()
     {
-        if (player != null && player.transform.position.y >= transform.position.y - 1f)
+        if (player != null)
         {
             targetPos = player.gameObject.transform.position;
             startPos.y = transform.position.y;
@@ -200,10 +205,12 @@ public class EnemyBase : MonoBehaviour
         if (Mathf.Abs(transform.position.x - targetPos.x) < 0.1f || !isGrounded)
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
+            isWalk = false;
         }
         else
         {
             rigid.velocity = new Vector2(movementDirection * moveSpeed, rigid.velocity.y);
+            isWalk = true;
         }
     }
 

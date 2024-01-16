@@ -362,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363646443474638194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.458, y: 0, z: 0}
+  m_LocalPosition: {x: 0.7, y: -0.094, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -492,7 +492,7 @@ MonoBehaviour:
   bulletSpeed: 10
   weaponPivot: {fileID: 7363646445094933246}
   sectorCount: 3
-  centralAmount: 0
+  centralAmount: 30
   sectorAttack: 0
   hitEffect: {fileID: 2189832415431004026, guid: 0e805ae7b75e4194faaaeb3905531e8b, type: 3}
   dieEffect: {fileID: 527646019474633233, guid: cdc27ad97209386489cb6eeeb1d42e82, type: 3}
@@ -542,8 +542,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363646444216050064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.741, y: 0, z: 0}
-  m_LocalScale: {x: 1.4684376, y: 0.42914057, z: 1}
+  m_LocalPosition: {x: 0.4347, y: -0.0613, z: 0}
+  m_LocalScale: {x: 0.8559522, y: 0.19527306, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7363646445094933246}

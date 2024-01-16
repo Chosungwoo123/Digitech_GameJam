@@ -336,6 +336,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDamage(float damage)
     {
+        if (isDash)
+        {
+            return;
+        }
+
         curHealth -= damage;
 
         if (curHealth <= 0)
