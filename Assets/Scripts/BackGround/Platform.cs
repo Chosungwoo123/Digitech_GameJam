@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Platform : MonoBehaviour
 {
     private PlatformEffector2D platformEffector;
 
     private bool isEnter;
+
+    private void Awake()
+    {
+        gameObject.GetComponent<BoxCollider2D>().size =
+            new Vector2(gameObject.GetComponent<SpriteRenderer>().size.x, gameObject.GetComponent<BoxCollider2D>().size.y);
+    }
 
     private void Start()
     {
