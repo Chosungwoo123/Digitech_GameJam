@@ -106,7 +106,7 @@ public class Boss : MonoBehaviour
         transform.DOMove(new Vector3(42, -19), 6);
 
         int shootCount = 20;
-        int bulletCount = 10;
+        int bulletCount = 30;
 
         WaitForSeconds interval = new WaitForSeconds(0.3f);
 
@@ -127,23 +127,27 @@ public class Boss : MonoBehaviour
 
     private IEnumerator Pattern03()
     {
-        transform.DOMove(new Vector3(-44, 46), 0.8f);
+        transform.DOMove(new Vector3(42, 46), 0.8f);
 
         yield return new WaitForSeconds(1f);
 
-        transform.DOMove(new Vector3(42, -19), 6);
+        transform.DOMove(new Vector3(-44, -19), 6);
 
-        int shootCount = 20;
+        int shootCount = 60;
         int bulletCount = 10;
 
-        WaitForSeconds interval = new WaitForSeconds(0.3f);
+        WaitForSeconds interval = new WaitForSeconds(0.1f);
+
+        float offset = 0;
 
         for (int i = 0; i < shootCount; i++)
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, damage, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, damage, true, 5, 6);
             }
+
+            offset += 6f;
 
             yield return interval;
         }

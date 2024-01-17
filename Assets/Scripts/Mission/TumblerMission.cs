@@ -16,6 +16,7 @@ public class TumblerMission : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.ShowTumblerUI();
+        GameManager.Instance.isStop = true;
 
         count++;
         var paperCup = Instantiate(paperCupPrefab, transform);

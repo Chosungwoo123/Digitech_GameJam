@@ -11,6 +11,7 @@ public class SavePowerMission : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.ShowSavePowerUI();
+        GameManager.Instance.isStop = true;
     }
 
     public void Success()

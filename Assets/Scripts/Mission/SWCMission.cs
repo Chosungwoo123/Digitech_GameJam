@@ -19,6 +19,7 @@ public class SWCMission : MonoBehaviour
         itemCount = Random.Range(minCount, maxCount);
 
         GameManager.Instance.ShowSWCUI();
+        GameManager.Instance.isStop = true;
 
         for (int i = 0; i < itemCount; i++)
         {
