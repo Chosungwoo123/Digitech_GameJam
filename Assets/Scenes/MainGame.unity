@@ -4823,37 +4823,27 @@ MonoBehaviour:
   missionCount: 0
   enemySpanwers:
   - {fileID: 2046824439}
-  - {fileID: 0}
   - {fileID: 1730269428}
-  - {fileID: 0}
   - {fileID: 1423061249}
   - {fileID: 1538041090}
   - {fileID: 624709338}
-  - {fileID: 1713965096}
-  - {fileID: 0}
   - {fileID: 200371246}
-  - {fileID: 0}
+  - {fileID: 1713965096}
   - {fileID: 1176307792}
-  - {fileID: 0}
   - {fileID: 189965712}
   - {fileID: 1328411889}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1389535844}
   - {fileID: 688242156}
   - {fileID: 644376890}
   - {fileID: 2002776864}
-  - {fileID: 0}
+  - {fileID: 1141786628}
   - {fileID: 158646845}
   - {fileID: 1621461399}
   - {fileID: 1186047801}
   - {fileID: 92252414}
   - {fileID: 800426286}
   - {fileID: 269825667}
-  - {fileID: 1141786628}
   - {fileID: 579950860}
-  - {fileID: 0}
   - {fileID: 1066629539}
   vc: {fileID: 347098562}
   bg: {fileID: 833509926}
@@ -18471,6 +18461,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -19304,6 +19298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -19708,6 +19706,10 @@ PrefabInstance:
     - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_Name
       value: NPC (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
@@ -20397,6 +20399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -20939,8 +20945,8 @@ Transform:
   - {fileID: 1423061248}
   - {fileID: 1538041089}
   - {fileID: 624709337}
-  - {fileID: 1713965095}
   - {fileID: 200371245}
+  - {fileID: 1713965095}
   - {fileID: 1176307791}
   - {fileID: 189965711}
   - {fileID: 1328411888}
@@ -20948,13 +20954,13 @@ Transform:
   - {fileID: 688242155}
   - {fileID: 644376889}
   - {fileID: 2002776863}
+  - {fileID: 1141786627}
   - {fileID: 158646844}
   - {fileID: 1621461398}
   - {fileID: 1186047800}
   - {fileID: 92252413}
   - {fileID: 800426285}
   - {fileID: 269825666}
-  - {fileID: 1141786627}
   - {fileID: 579950859}
   - {fileID: 1066629538}
   m_Father: {fileID: 0}
@@ -22634,6 +22640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -23131,6 +23141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -23349,6 +23363,10 @@ PrefabInstance:
     - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_Name
       value: NPC (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
@@ -23754,6 +23772,10 @@ PrefabInstance:
     - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_Name
       value: NPC (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594521115849081801, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594521115849081802, guid: 63dd4d982b64f344cbb0324f7fc0210a, type: 3}
       propertyPath: m_RootOrder
