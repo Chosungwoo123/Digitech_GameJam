@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI healthText;
     public Image fadeImage;
     public GameObject gameOverObj;
+    public Image healthImage;
 
     [Space(10)]
     [Header("아이템 변수")]
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        healthImage.fillAmount = curPlayer.GetComponent<PlayerMovement>().curHealth / curPlayer.GetComponent<PlayerMovement>().maxHealth;
         healthText.text = curPlayer.GetComponent<PlayerMovement>().curHealth + " / " + curPlayer.GetComponent<PlayerMovement>().maxHealth;
     }
 

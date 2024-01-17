@@ -18,6 +18,8 @@ public class Boss : MonoBehaviour
 
     public AudioClip hitSound;
 
+    public float damage = 10;
+
     private float curHealth;
 
     private Animator anim;
@@ -81,8 +83,8 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, 10, true, 5, 6);
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, -(j + offset))).Init(10, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, damage, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, -(j + offset))).Init(10, damage, true, 5, 6);
             }
 
             yield return interval;
@@ -112,7 +114,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, damage, true, 5, 6);
             }
 
             yield return interval;
@@ -140,7 +142,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(10, damage, true, 5, 6);
             }
 
             yield return interval;
@@ -195,7 +197,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j + offset)).Init(10, damage, true, 5, 6);
             }
 
             offset += 6f;
@@ -215,7 +217,7 @@ public class Boss : MonoBehaviour
         {
             for (int j = 0; j < 360; j += 360 / bulletCount)
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(15, 10, true, 5, 6);
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, j)).Init(15, damage, true, 5, 6);
             }
 
             yield return interval;
@@ -245,7 +247,7 @@ public class Boss : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Quaternion rot = Quaternion.Euler(0, 0, z);
-            Instantiate(bulletPrefab, transform.position, rot).Init(10, 10, true, 5, 4);
+            Instantiate(bulletPrefab, transform.position, rot).Init(10, damage, true, 10, 8);
             z += amount;
         }
     }
